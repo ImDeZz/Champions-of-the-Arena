@@ -5,14 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class PhotonRoomManager : Photon.MonoBehaviour
 {
+    enum States
+    {
+        START_STATE = 0,
+        CONNECTED_TO_SERVER,
+        CONNECTED_TO_LOBBY,
+        CONNECTED_TO_ROOM,
+        BREAK,
+        MATCHMAKING
+    };
 
-    int state = 0;
+    States state;
     public int maxPlayers;
 
     
     void Start()
     {
-        state = 0;
+        state = States.START_STATE;
     }
 
     void OnGUI()
@@ -20,40 +29,40 @@ public class PhotonRoomManager : Photon.MonoBehaviour
         switch (state)
         {
             //Start
-            case 0:
+            case States.START_STATE:
                 //if (GUI.Button(new Rect(280, 163, 150, 30), "Connect"))
                 {
                     PhotonNetwork.ConnectUsingSettings("alpha0.1");
                     
-                    state = 4;
+                    state = States.BREAK;
                 }
                 break;
             //Connected to Server
-            case 1:
+            case States.CONNECTED_TO_SERVER:
                 //if (GUI.Button(new Rect(10, 10, 200, 30), "Duel Mode"))
                 {
                     PhotonNetwork.JoinLobby();
-                    state = 4;
+                    state = States.BREAK;
                 }
                 break;
             //Connected to Lobby
-            case 2:
+            case States.CONNECTED_TO_LOBBY:
                 //if (GUI.Button(new Rect(10, 10, 200, 30), "Find Match"))
                 {
                     PhotonNetwork.JoinRandomRoom();
-                    state = 4;
+                    state = States.BREAK;
                 }
                 break;
             //Connected to Room
-            case 3:
+            case States.CONNECTED_TO_ROOM:
 
                 break;
             //Break
-            case 4:
+            case States.BREAK:
 
                 break;
             //Matchmaking
-            case 5:
+            case States.MATCHMAKING:
                 if (PhotonNetwork.playerList.Length == maxPlayers)
                 {
                     StartGame();
@@ -67,12 +76,12 @@ public class PhotonRoomManager : Photon.MonoBehaviour
 
     void OnConnectedToPhoton()
     {
-        state = 1;
+        state = States.CONNECTED_TO_SERVER;
     }
 
     void OnJoinedLobby()
     {
-        state = 2;
+        state = States.CONNECTED_TO_LOBBY;
     }
 
     void OnPhotonRandomJoinFailed()
@@ -82,12 +91,12 @@ public class PhotonRoomManager : Photon.MonoBehaviour
 
     void OnJoinedRoom()
     {
-        state = 5;
+        state = States.MATCHMAKING;
     }
 
     void StartGame()
     {
-        state = 3;
+        state = States.CONNECTED_TO_ROOM;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
