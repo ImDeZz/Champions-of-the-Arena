@@ -10,6 +10,7 @@ public class WeaponCarry : MonoBehaviour {
     bool carryWeapon = false;
     Dictionary<string, int> playerPerWeapon = new Dictionary<string, int>(); //PlayerName, WeaponIndex
 
+
 	void Start ()
     {
         player = GameObject.Find("Player");
@@ -31,6 +32,7 @@ public class WeaponCarry : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.name);
         if (!carryWeapon)
         {
             Debug.Log(collision.gameObject.name);
