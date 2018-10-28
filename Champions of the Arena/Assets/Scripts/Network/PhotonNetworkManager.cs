@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon;
 
-public class PhotonNetworkManager : PunBehaviour
+public class PhotonNetworkManager : Photon.MonoBehaviour
 {
+    [SerializeField] private Text connectText;
+    [SerializeField] private GameObject player;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject lobbyCam;
 
     private string gameVersion = "alpha0.1";
 
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
         PhotonNetwork.ConnectUsingSettings(gameVersion);
+        PhotonNetwork.sendRate = 60;
+        PhotonNetwork.sendRateOnSerialize = 30;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -20,42 +28,18 @@ public class PhotonNetworkManager : PunBehaviour
         //Debug.Log(PhotonNetwork.connectionStateDetailed.ToString());
     }
 
-    public override void OnPhotonPlayerConnected(PhotonPlayer other)
+
+    public virtual void OnJoinedLobby()
     {
-        Debug.Log("OnPhotonPlayerConnected() " + other.NickName); // not seen if you're the player connecting
-
-
-        if (PhotonNetwork.isMasterClient)
-        {
-            Debug.Log("OnPhotonPlayerConnected isMasterClient " + PhotonNetwork.isMasterClient); // called before OnPhotonPlayerDisconnected
-
-
-            LoadArena();
-        }
+        Debug.Log("Joined the lobby");
+        PhotonNetwork.JoinOrCreateRoom("NEW", null, null);
     }
 
-
-    public override void OnPhotonPlayerDisconnected(PhotonPlayer other)
+    public virtual void OnJoinedRoom()
     {
-        Debug.Log("OnPhotonPlayerDisconnected() " + other.NickName); // seen when other disconnects
-
-
-        if (PhotonNetwork.isMasterClient)
-        {
-            Debug.Log("OnPhotonPlayerDisonnected isMasterClient " + PhotonNetwork.isMasterClient); // called before OnPhotonPlayerDisconnected
-
-
-            LoadArena();
-        }
+        PhotonNetwork.Instantiate(player.name, new Vector3(((0 * 10) - 25), 5.36f, ((2 * 9) - 30)), spawnPoint.rotation, 0);
+        lobbyCam.SetActive(false);
+        connectText.text = "";
     }
-
-    void LoadArena()
-    {
-        if (!PhotonNetwork.isMasterClient)
-        {
-            Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-        }
-        Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-        PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.room.PlayerCount);
-    }
+   
 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PhotonRoomManager : Photon.MonoBehaviour
 {
+
     enum States
     {
         START_STATE = 0,
@@ -26,52 +27,53 @@ public class PhotonRoomManager : Photon.MonoBehaviour
 
     void OnGUI()
     {
-        switch (state)
-        {
-            //Start
-            case States.START_STATE:
-                //if (GUI.Button(new Rect(280, 163, 150, 30), "Connect"))
-                {
-                    PhotonNetwork.ConnectUsingSettings("alpha0.1");
-                    
-                    state = States.BREAK;
-                }
-                break;
-            //Connected to Server
-            case States.CONNECTED_TO_SERVER:
-                //if (GUI.Button(new Rect(10, 10, 200, 30), "Duel Mode"))
-                {
-                    PhotonNetwork.JoinLobby();
-                    state = States.BREAK;
-                }
-                break;
-            //Connected to Lobby
-            case States.CONNECTED_TO_LOBBY:
-                //if (GUI.Button(new Rect(10, 10, 200, 30), "Find Match"))
-                {
-                    PhotonNetwork.JoinRandomRoom();
-                    state = States.BREAK;
-                }
-                break;
-            //Connected to Room
-            case States.CONNECTED_TO_ROOM:
+        StartGame();
+        //switch (state)
+        //{
+        //    //Start
+        //    case States.START_STATE:
+        //        //if (GUI.Button(new Rect(280, 163, 150, 30), "Connect"))
+        //        {
+        //            PhotonNetwork.ConnectUsingSettings("alpha0.1");
 
-                break;
-            //Break
-            case States.BREAK:
+        //            state = States.BREAK;
+        //        }
+        //        break;
+        //    //Connected to Server
+        //    case States.CONNECTED_TO_SERVER:
+        //        //if (GUI.Button(new Rect(10, 10, 200, 30), "Duel Mode"))
+        //        {
+        //            PhotonNetwork.JoinLobby();
+        //            state = States.BREAK;
+        //        }
+        //        break;
+        //    //Connected to Lobby
+        //    case States.CONNECTED_TO_LOBBY:
+        //        //if (GUI.Button(new Rect(10, 10, 200, 30), "Find Match"))
+        //        {
+        //            PhotonNetwork.JoinRandomRoom();
+        //            state = States.BREAK;
+        //        }
+        //        break;
+        //    //Connected to Room
+        //    case States.CONNECTED_TO_ROOM:
 
-                break;
-            //Matchmaking
-            case States.MATCHMAKING:
-                if (PhotonNetwork.playerList.Length == maxPlayers)
-                {
-                    StartGame();
-                    
-                }
+        //        break;
+        //    //Break
+        //    case States.BREAK:
 
-                //GUI.Label(new Rect(10, Screen.height - 50, 200, 30), "Players: " + PhotonNetwork.playerList.Length.ToString() + "/" + maxPlayers.ToString());
-                break;
-        }
+        //        break;
+        //    //Matchmaking
+        //    case States.MATCHMAKING:
+        //        if (PhotonNetwork.playerList.Length == maxPlayers)
+        //        {
+        //            StartGame();
+
+        //        }
+
+        //        //GUI.Label(new Rect(10, Screen.height - 50, 200, 30), "Players: " + PhotonNetwork.playerList.Length.ToString() + "/" + maxPlayers.ToString());
+        //        break;
+        //}
     }
 
     void OnConnectedToPhoton()

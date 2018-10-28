@@ -10,7 +10,7 @@ public class OnSceneLoad : MonoBehaviour
     public int weaponCount = 4;
     public int mapDiv = 6;
     System.Random r = new System.Random();
-    bool[,] mapObjects;
+    private static bool[,] mapObjects;
     List<KeyValuePair<int, int>> weaponPlaces = new List<KeyValuePair<int, int>>();
 
     readonly List<string> weaponList = new List<string>()
@@ -79,8 +79,38 @@ public class OnSceneLoad : MonoBehaviour
 
     private bool positionsAreNotOkay(int x, int y)
     {
-        return (mapObjects[x, y] == true || mapObjects[x-1, y] == true
-             || mapObjects[x+1, y] == true || mapObjects[x, y-1] == true
-             || mapObjects[x, y+1] == true);
+        return (mapObjects[x, y] == true || mapObjects[x - 1, y] == true
+                || mapObjects[x + 1, y] == true || mapObjects[x, y - 1] == true
+                || mapObjects[x, y + 1] == true);
     }
+
+
+    public Vector3 getRandomSpawnPointForPlayer()
+    {
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < weaponCount; i++)
+        {
+            int ErrorCount = 0;
+            do
+            {
+                x = r.Next(0, mapDiv);
+                y = r.Next(0, 1);
+
+                if (r.Next(0, 100) > 50)
+                {
+                    x = r.Next(mapDiv-1, mapDiv);
+                    y = r.Next(0, 1);
+                }
+
+                ErrorCount++;
+            } while (positionsAreNotOkay(x, y) && ErrorCount < mapDiv);
+
+            mapObjects[x, y] = true;
+            weaponPlaces.Add(new KeyValuePair<int, int>(x, y));
+        }
+
+        return new Vector3(((x * 10) - 25), 5.36f, ((y * 9) - 30));
+    }
+
 }
