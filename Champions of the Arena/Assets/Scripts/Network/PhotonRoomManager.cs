@@ -102,5 +102,13 @@ public class PhotonRoomManager : Photon.MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void LeaveGame()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
     
+    void OnLeftRoom()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
