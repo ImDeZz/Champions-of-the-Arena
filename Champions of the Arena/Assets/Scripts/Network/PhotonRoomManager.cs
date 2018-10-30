@@ -100,6 +100,7 @@ public class PhotonRoomManager : Photon.MonoBehaviour
     {
         state = States.CONNECTED_TO_ROOM;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
     }
+
+    
 }
