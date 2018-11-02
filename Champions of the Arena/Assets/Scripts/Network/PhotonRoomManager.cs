@@ -27,7 +27,7 @@ public class PhotonRoomManager : Photon.MonoBehaviour
 
     void OnGUI()
     {
-        StartGame();
+       // StartGame();
         //switch (state)
         //{
         //    //Start
@@ -99,16 +99,17 @@ public class PhotonRoomManager : Photon.MonoBehaviour
     void StartGame()
     {
         state = States.CONNECTED_TO_ROOM;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void LeaveGame()
     {
         PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
     }
     
     void OnLeftRoom()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        
     }
 }
