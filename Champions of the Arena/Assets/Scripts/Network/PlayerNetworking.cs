@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerNetworking : MonoBehaviour {
 
     [SerializeField] private GameObject playerCam;
-    private 
-        PhotonView pV;
-    // Use this for initialization
+    private PhotonView pV;
+    
     void Start ()
     {
         pV = GetComponent<PhotonView>();
@@ -18,6 +17,7 @@ public class PlayerNetworking : MonoBehaviour {
         }
         else
         {
+            playerCam.SetActive(true);
             Debug.Log("New Player Connected: " + PhotonNetwork.player.ID);
         }
 	}

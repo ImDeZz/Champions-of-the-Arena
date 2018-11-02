@@ -43,7 +43,6 @@ public class Movement :  Photon.MonoBehaviour
         {      
             targetPos = (Vector3)stream.ReceiveNext();
             targetRot = (Quaternion)stream.ReceiveNext();
-            Debug.Log("The rotation is: " + targetRot);
         }
     }
 
