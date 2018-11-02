@@ -40,9 +40,9 @@ GameObject:
   - component: {fileID: 114797291532076180}
   - component: {fileID: 143632682367673584}
   - component: {fileID: 114531395839348780}
-  - component: {fileID: 114731124808766052}
   - component: {fileID: 114359921876467760}
   - component: {fileID: 114129360726063000}
+  - component: {fileID: 114619712156458018}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774023953738824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.644737, y: 12.823493, z: -23.426294}
+  m_LocalPosition: {x: 3.0106983, y: 26.57587, z: -31.895948}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4451273565285040}
@@ -222,6 +222,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 114797291532076180}
+  - {fileID: 114531395839348780}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -250,17 +251,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b44b574360a474bb9d5567dcc06d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114731124808766052
+  player: {fileID: 1774023953738824}
+--- !u!114 &114619712156458018
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774023953738824}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a57615c7d01c8c5499743b9995b1c88b, type: 3}
+  m_Script: {fileID: 11500000, guid: a1fd1852a214ff045a543d741403ffd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: Coca
 --- !u!114 &114797291532076180
 MonoBehaviour:
   m_ObjectHideFlags: 1

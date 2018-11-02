@@ -6,7 +6,7 @@ public class PlayerNetworking : MonoBehaviour {
 
     [SerializeField] private GameObject playerCam;
     private PhotonView pV;
-    // Use this for initialization
+    
     void Start ()
     {
         pV = GetComponent<PhotonView>();

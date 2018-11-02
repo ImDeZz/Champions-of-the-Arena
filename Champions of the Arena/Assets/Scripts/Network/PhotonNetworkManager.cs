@@ -7,13 +7,10 @@ using System;
 
 public class PhotonNetworkManager : Photon.MonoBehaviour
 {
-    [SerializeField] private Text connectText;
     [SerializeField] private GameObject player;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject lobbyCam;
-    [SerializeField] private string gameVersion = "alpha0.1";
-    [SerializeField] private byte weaponCount ;
-    [SerializeField] private byte mapDiv;
+    [SerializeField] readonly private string gameVersion = "alpha0.1";
     System.Random r = new System.Random();
 
     void OnEnable()
@@ -26,7 +23,7 @@ public class PhotonNetworkManager : Photon.MonoBehaviour
     public virtual void OnJoinedLobby()
     {
         Debug.Log("Joined the lobby");
-        PhotonNetwork.JoinOrCreateRoom("NEW", null, null);
+        PhotonNetwork.JoinOrCreateRoom("NEW1", null, null);
     }
 
     public virtual void OnJoinedRoom()
@@ -46,9 +43,7 @@ public class PhotonNetworkManager : Photon.MonoBehaviour
         //    }
         //}
 
-
         PhotonNetwork.Instantiate(player.name, new Vector3(((x * 10) - 25), 5.36f, (((y * 9) - 30))), spawnPoint.rotation, 0);
         lobbyCam.SetActive(false);
-        connectText.text = "";
     }
 }

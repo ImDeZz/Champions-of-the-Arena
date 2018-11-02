@@ -38,4 +38,5 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - spawnObjects
+  - hitSomething
   DisableAutoOpenWizard: 1

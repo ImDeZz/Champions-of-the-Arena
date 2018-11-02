@@ -15,9 +15,9 @@ public class Spawn : Photon.MonoBehaviour
 
     readonly List<string> weaponList = new List<string>()
     {
+        "WeaponFi",
         "WeaponF",
-        "WeaponB",
-        "WeaponFi"
+        "WeaponB",    
     };
 
     void Update()
@@ -41,7 +41,7 @@ public class Spawn : Photon.MonoBehaviour
             string weaponType = "";
             if (weaponList.Count > 0)
             {
-                weaponType = weaponList[r.Next(0, weaponList.Count - 1)];
+                weaponType = weaponList[r.Next(0, weaponList.Count)];
 
                 weapons.Add(weaponType);       
             }
@@ -73,8 +73,8 @@ public class Spawn : Photon.MonoBehaviour
 
     private void configureWeaponModel(int currentWeapon, KeyValuePair<int, int> place)
     {
-        Debug.Log("SPAWNING WEAPON");
-        GameObject Instantiate = PhotonNetwork.Instantiate(weapons[currentWeapon], new Vector3(((place.Key * 10) - 25), 5.36f, ((place.Value * 9) - 30)), new Quaternion(), 0) as GameObject;
+        GameObject Instantiate = PhotonNetwork.Instantiate(weapons[currentWeapon], new Vector3(((place.Key * 10) - 25), 5.36f, ((place.Value * 9) - 30)), new Quaternion(0,0,0,0), 0) as GameObject;
+        Instantiate.name = weapons[currentWeapon] +"_" +currentWeapon;
     }
 
     private bool positionsAreNotOkay(int x, int y)

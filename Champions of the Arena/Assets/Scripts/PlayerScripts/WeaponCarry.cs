@@ -1,54 +1,48 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponCarry : MonoBehaviour {
 
-    GameObject[] weapons;
-    GameObject player;
-    bool[] weaponBeingCarried;
-    bool carryWeapon = false;
-    Dictionary<string, int> playerPerWeapon = new Dictionary<string, int>(); //PlayerName, WeaponIndex
+    [SerializeField] GameObject player;
+    private PlayerStats playerStatScript;
+    PhotonView photonView;
+
+    void Start()
+    {
+        playerStatScript = player.GetComponent<PlayerStats>();
+        photonView = player.GetComponent<PhotonView>();
+    }
 
 
-	void Start ()
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        player = GameObject.Find("Player");
-        weapons = GameObject.FindGameObjectsWithTag("Weapons");
-        weaponBeingCarried = new bool[weapons.Length];
-        for (int i = 0; i < weapons.Length; i++)
+        if (hit.gameObject.tag == "Weapons")
         {
-            weaponBeingCarried[i] = false;
-        }
-	}
-	
-	void Update ()
-    {
-        if (carryWeapon)
-        {
-            weapons[playerPerWeapon[player.name]].transform.localPosition = player.transform.localPosition;
-        }
-	}
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-        if (!carryWeapon)
-        {
-            Debug.Log(collision.gameObject.name);
-            if (collision.gameObject.tag == "Weapons")
+            if (!playerStatScript.getHasWeapon())
             {
-                int weaponIndex = int.Parse(collision.gameObject.name);
-                playerPerWeapon[player.name] = weaponIndex;
-                weaponBeingCarried[weaponIndex] = true;
-                carryWeapon = true;
+                photonView.RPC(
+                    "hitSomething",
+                    PhotonTargets.AllBufferedViaServer,
+                    new object[] { hit.gameObject.GetComponent <PhotonView>().viewID }
+                );
+                
+                playerStatScript.setWeapon(hit.gameObject.name);
+                Debug.Log(playerStatScript.getName() + " has: " + playerStatScript.getWeaponType());
             }
         }
     }
 
-    public void DropWeapon()
+    [PunRPC]
+    private void hitSomething(int id)
     {
-
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.Destroy(PhotonView.Find(id));
+        }
     }
-
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
 }
