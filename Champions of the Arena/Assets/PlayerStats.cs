@@ -29,11 +29,6 @@ public class PlayerStats : MonoBehaviour
         playerWeapon = "";
     }
 
-    public void playerUsedWeapon()
-    {
-        playerHasWeapon = false;
-    }
-
     public bool getHasWeapon()
     {
         return playerHasWeapon;

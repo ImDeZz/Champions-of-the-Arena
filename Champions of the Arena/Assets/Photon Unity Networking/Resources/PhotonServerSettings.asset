@@ -39,4 +39,8 @@ MonoBehaviour:
   - RequestForPickupTimes
   - spawnObjects
   - hitSomething
+  - CastBasicSpell
+  - CastFireSpell
+  - CastFrostSpell
+  - SpawnProjectile
   DisableAutoOpenWizard: 1

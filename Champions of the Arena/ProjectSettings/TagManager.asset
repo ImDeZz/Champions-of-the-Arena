@@ -6,6 +6,7 @@ TagManager:
   tags:
   - VirtualJoyStick
   - Weapons
+  - Projectile
   layers:
   - Default
   - TransparentFX

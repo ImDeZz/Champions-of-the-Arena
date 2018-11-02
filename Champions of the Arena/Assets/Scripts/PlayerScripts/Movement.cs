@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// EHHEZ A FÁJLHOZ SENKI NE NYÚLJON
+/// EHHEZ A FÁJLHOZ NE NYÚLJATOK
 /// </summary>
-public class Movement :  Photon.MonoBehaviour
+public class Movement : Photon.MonoBehaviour
 {
     [SerializeField] float speed = 20.0f;
     [SerializeField] bool teleportEnabled;
@@ -40,7 +40,7 @@ public class Movement :  Photon.MonoBehaviour
             stream.SendNext(playerMoji.transform.rotation);
         }
         else
-        {      
+        {
             targetPos = (Vector3)stream.ReceiveNext();
             targetRot = (Quaternion)stream.ReceiveNext();
         }

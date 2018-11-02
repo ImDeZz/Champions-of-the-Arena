@@ -6,6 +6,7 @@ using UnityEngine;
 public class WeaponCarry : MonoBehaviour {
 
     [SerializeField] GameObject player;
+    [SerializeField] string weapon;
     private PlayerStats playerStatScript;
     PhotonView photonView;
 
@@ -27,7 +28,7 @@ public class WeaponCarry : MonoBehaviour {
                     PhotonTargets.AllBufferedViaServer,
                     new object[] { hit.gameObject.GetComponent <PhotonView>().viewID }
                 );
-                
+                weapon = hit.gameObject.name;
                 playerStatScript.setWeapon(hit.gameObject.name);
                 Debug.Log(playerStatScript.getName() + " has: " + playerStatScript.getWeaponType());
             }

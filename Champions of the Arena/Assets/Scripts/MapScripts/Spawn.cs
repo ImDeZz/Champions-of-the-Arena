@@ -16,7 +16,7 @@ public class Spawn : Photon.MonoBehaviour
     readonly List<string> weaponList = new List<string>()
     {
         "WeaponFi",
-        "WeaponF",
+        "WeaponFr",
         "WeaponB",    
     };
 
@@ -74,7 +74,7 @@ public class Spawn : Photon.MonoBehaviour
     private void configureWeaponModel(int currentWeapon, KeyValuePair<int, int> place)
     {
         GameObject Instantiate = PhotonNetwork.Instantiate(weapons[currentWeapon], new Vector3(((place.Key * 10) - 25), 5.36f, ((place.Value * 9) - 30)), new Quaternion(0,0,0,0), 0) as GameObject;
-        Instantiate.name = weapons[currentWeapon] +"_" +currentWeapon;
+        Instantiate.name = weapons[currentWeapon] + "_" +currentWeapon;
     }
 
     private bool positionsAreNotOkay(int x, int y)
@@ -82,5 +82,9 @@ public class Spawn : Photon.MonoBehaviour
         return (mapObjects[x, y] == true || mapObjects[x - 1, y] == true
                 || mapObjects[x + 1, y] == true || mapObjects[x, y - 1] == true
                 || mapObjects[x, y + 1] == true);
+    }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
     }
 }
