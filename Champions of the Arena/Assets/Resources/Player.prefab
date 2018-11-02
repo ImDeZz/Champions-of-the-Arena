@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114359921876467760}
   - component: {fileID: 114129360726063000}
   - component: {fileID: 114619712156458018}
+  - component: {fileID: 114964137419373058}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -100,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774023953738824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0106983, y: 26.57587, z: -31.895948}
+  m_LocalPosition: {x: 501.54514, y: 240.57574, z: -622.24133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4451273565285040}
@@ -278,6 +279,19 @@ MonoBehaviour:
   speed: 15
   teleportEnabled: 1
   teleportThreshold: 10
+--- !u!114 &114964137419373058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1774023953738824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2ce48ba9dece6499b59668b48c1cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1774023953738824}
+  playerStat: {fileID: 114619712156458018}
 --- !u!136 &136879657841846312
 CapsuleCollider:
   m_ObjectHideFlags: 1

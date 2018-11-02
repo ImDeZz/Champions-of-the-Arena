@@ -22,6 +22,13 @@ public class PlayerStats : MonoBehaviour
         playerHasWeapon = true;
     }
 
+    public void Attack()
+    {
+        Debug.Log(playerName + " has just attacked with " + playerWeapon);
+        playerHasWeapon = false;
+        playerWeapon = "";
+    }
+
     public void playerUsedWeapon()
     {
         playerHasWeapon = false;
