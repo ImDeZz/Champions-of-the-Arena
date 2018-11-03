@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 136941847864152920}
   - component: {fileID: 54195104343172360}
   - component: {fileID: 114921215142805424}
+  - component: {fileID: 114585354596441984}
   m_Layer: 0
   m_Name: ProjectileFr
   m_TagString: Projectile
@@ -38,7 +39,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731441319284328}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 31.216053, y: 62.81056, z: -219.86485}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
@@ -100,7 +101,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!95 &95048252385554472
 Animator:
@@ -120,6 +121,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114585354596441984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731441319284328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e1410711d5b884093038ddbdef1cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1731441319284328}
+  projectileSpeed: 250
+  shootCollisionDelay: 0.3
 --- !u!114 &114921215142805424
 MonoBehaviour:
   m_ObjectHideFlags: 1

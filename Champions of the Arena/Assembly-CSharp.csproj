@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Attack.cs" />
     <Compile Include="Assets\Joysttick\VirtualJoystick\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Joysttick\VirtualJoystick\Scripts\VirtualJoystick.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\DemoBoxes\ColorPerPlayer.cs" />
@@ -139,7 +138,6 @@
     <Compile Include="Assets\PhotonChatApi\ChatState.cs" />
     <Compile Include="Assets\PhotonChatApi\ChatUserStatus.cs" />
     <Compile Include="Assets\PhotonChatApi\IChatClientListener.cs" />
-    <Compile Include="Assets\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\MapScripts\Player.cs" />
     <Compile Include="Assets\Scripts\MapScripts\Spawn.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MainMenu.cs" />
@@ -147,10 +145,13 @@
     <Compile Include="Assets\Scripts\Network\PhotonNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Network\PhotonRoomManager.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerNetworking.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\Attack.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Movement.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Rotation.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\Shot.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\SpellCast.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\WeaponCarry.cs" />
-    <Compile Include="Assets\SpellCast.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Photon Unity Networking\link.xml" />
