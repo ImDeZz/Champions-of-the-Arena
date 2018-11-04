@@ -12,13 +12,24 @@ public class Spawn : Photon.MonoBehaviour
     private System.Random r = new System.Random();
     private static bool[,] mapObjects;
     private List<KeyValuePair<int, int>> weaponPlaces = new List<KeyValuePair<int, int>>();
+    public int targetFrameRate = 30;
 
     readonly List<string> weaponList = new List<string>()
     {
         "WeaponFi",
         "WeaponFr",
-        "WeaponB",    
+        "WeaponFr",
+        "WeaponB",
+        "WeaponB",
+        "WeaponB",
     };
+    
+
+    private void Start()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = targetFrameRate;
+    }
 
     void Update()
     {

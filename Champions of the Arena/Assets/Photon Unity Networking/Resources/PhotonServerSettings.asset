@@ -43,4 +43,7 @@ MonoBehaviour:
   - CastFireSpell
   - CastFrostSpell
   - SpawnProjectile
+  - removeProjectile
+  - startProjectile
+  - killPlayer
   DisableAutoOpenWizard: 1
