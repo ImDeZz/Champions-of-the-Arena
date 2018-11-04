@@ -225,6 +225,7 @@ MonoBehaviour:
   - {fileID: 114797291532076180}
   - {fileID: 114531395839348780}
   - {fileID: 114964137419373058}
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -254,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1774023953738824}
+  weapon: 
 --- !u!114 &114619712156458018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,6 +295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1774023953738824}
   playerStat: {fileID: 114619712156458018}
+  deathMenu1: {fileID: 0}
+  deathMenu: {fileID: 0}
 --- !u!136 &136879657841846312
 CapsuleCollider:
   m_ObjectHideFlags: 1

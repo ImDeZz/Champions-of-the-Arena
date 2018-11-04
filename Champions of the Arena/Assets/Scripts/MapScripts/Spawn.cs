@@ -16,8 +16,8 @@ public class Spawn : Photon.MonoBehaviour
     readonly List<string> weaponList = new List<string>()
     {
         "WeaponFi",
-        "WeaponFr",
-        "WeaponB",    
+        //"WeaponFr",
+        //"WeaponB",    
     };
 
     void Update()

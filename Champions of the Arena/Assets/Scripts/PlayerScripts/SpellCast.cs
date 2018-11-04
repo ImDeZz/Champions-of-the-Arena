@@ -7,10 +7,13 @@ public class SpellCast : Photon.MonoBehaviour
 {
     [SerializeField] GameObject Player; 
     [SerializeField] PlayerStats playerStat;
-    private const float spawnDistance = 3.35f;
+	//[SerializeField] GameObject deathMenu1;
+
+	private const float spawnDistance = 3.35f;
     private Attack attack;
     private PhotonView pv;
     private GameObject playerMoji;
+	//public DeathMenu deathMenu;
 
     private void Start ()
     {
@@ -31,7 +34,10 @@ public class SpellCast : Photon.MonoBehaviour
                         "SpawnProjectile",
                         PhotonTargets.All,
                         new object[] { playerStat.getWeaponType() });
-                }
+					
+					
+					
+				}
                 
                 playerStat.Attack();
                 attack.attackHappened();
@@ -81,6 +87,7 @@ public class SpellCast : Photon.MonoBehaviour
         GameObject Instantiate = PhotonNetwork.InstantiateSceneObject("ProjectileFr", spawnPos, playerRotation, 0, null) as GameObject;
         Instantiate.GetComponent<Rigidbody>().AddRelativeForce((Instantiate.transform.forward * -1) * 300 * Time.deltaTime, ForceMode.VelocityChange);
         Instantiate.tag = "Projectile";
+
     }
 
     public void CastBasicSpell()
@@ -100,6 +107,7 @@ public class SpellCast : Photon.MonoBehaviour
         GameObject Instantiate = PhotonNetwork.InstantiateSceneObject("ProjectileB", spawnPos, playerRotation, 0, null) as GameObject;
         Instantiate.GetComponent<Rigidbody>().AddRelativeForce((Instantiate.transform.forward * -1) * 300 * Time.deltaTime, ForceMode.VelocityChange);
         Instantiate.tag = "Projectile";
+
     }
 
     public void CastFireSpell()
@@ -116,10 +124,18 @@ public class SpellCast : Photon.MonoBehaviour
         Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
 
         playerRotation = playerRotation * Quaternion.Euler(90f, 0, 90f);
-        GameObject Instantiate = PhotonNetwork.InstantiateSceneObject("ProjectileFi", spawnPos, playerRotation, 0, null) as GameObject;
-        Instantiate.tag = "Projectile";
-        Instantiate.GetComponent<Rigidbody>().AddRelativeForce((Instantiate.transform.forward * -1) * 300 * Time.deltaTime, ForceMode.VelocityChange);
-    }
+        GameObject Instantiate1 = PhotonNetwork.InstantiateSceneObject("ProjectileFi", spawnPos, playerRotation, 0, null) as GameObject;
+        Instantiate1.tag = "Projectile";
+        Instantiate1.GetComponent<Rigidbody>().AddRelativeForce((Instantiate1.transform.forward * -1) * 300 * Time.deltaTime, ForceMode.VelocityChange);
+		//deathMenu.ToggleEndMenu(3);
+		//Instantiate(deathMenu1);
+		//deathMenu.visible = true;
+		//GameObject.Find("Canvas").SetActive(false);
+		//GameObject.Find("DeathCanvas(Clone)").SetActive(true);
+
+
+
+	}
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
