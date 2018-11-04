@@ -30,7 +30,7 @@ public class WeaponCarry : MonoBehaviour {
                 );
                 weapon = hit.gameObject.name;
                 playerStatScript.setWeapon(hit.gameObject.name);
-                Debug.Log(playerStatScript.getName() + " has: " + playerStatScript.getWeaponType());
+                //Debug.Log(playerStatScript.getName() + " has: " + playerStatScript.getWeaponType());
             }
         }
     }

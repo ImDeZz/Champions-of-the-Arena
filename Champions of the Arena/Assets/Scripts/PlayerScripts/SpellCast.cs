@@ -7,7 +7,10 @@ public class SpellCast : Photon.MonoBehaviour
 {
     [SerializeField] GameObject Player; 
     [SerializeField] PlayerStats playerStat;
-    private const float spawnDistance = 3.35f;
+    [SerializeField] private GameObject fire;
+    [SerializeField] private GameObject ice;
+    [SerializeField] private GameObject basic;
+    private const float spawnDistance = 2f;
     private Attack attack;
     private PhotonView pv;
     private GameObject playerMoji;
@@ -27,10 +30,11 @@ public class SpellCast : Photon.MonoBehaviour
             {
                 if (pv.isMine)
                 {
-                    this.photonView.RPC(
-                        "SpawnProjectile",
-                        PhotonTargets.All,
-                        new object[] { playerStat.getWeaponType() });
+                    //    this.photonView.RPC(
+                    //        "SpawnProjectile",
+                    //        PhotonTargets.All,
+                    //        new object[] { playerStat.getWeaponType() });
+                    SpawnProjectile(playerStat.getWeaponType());
                 }
                 
                 playerStat.Attack();
@@ -43,82 +47,53 @@ public class SpellCast : Photon.MonoBehaviour
         }
 	}
 
-    [PunRPC]
     private void SpawnProjectile(string weaponType)
     {
-        if (PhotonNetwork.isMasterClient)
+        var ping = PhotonNetwork.GetPing();
+        Vector3 playerPos = playerMoji.transform.position;
+        Vector3 playerDirection = playerMoji.transform.right * -1;
+        Quaternion playerRotation = playerMoji.transform.rotation;
+        Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
+        playerRotation = playerRotation * Quaternion.Euler(90f, 0, 90f);
+
+        if (weaponType.Contains("WeaponFi"))
         {
-            if (weaponType.Contains("WeaponFi"))
-            {
-                CastFireSpell();
-            }
-            else if (weaponType.Contains("WeaponB"))
-            {
-                CastBasicSpell();
-            }
-            else if (weaponType.Contains("WeaponFr"))
-            {
-                CastFrostSpell();
-            }
-        }   
+            this.photonView.RPC("CastFireSpell", PhotonTargets.All, spawnPos, playerRotation);
+        }
+        else if (weaponType.Contains("WeaponB"))
+        {
+            this.photonView.RPC("CastBasicSpell", PhotonTargets.All, spawnPos, playerRotation);
+        }
+        else if (weaponType.Contains("WeaponFr"))
+        {
+            this.photonView.RPC("CastFrostSpell", PhotonTargets.All, spawnPos, playerRotation);
+        }  
     }
 
-    public void CastFrostSpell()
+    [PunRPC]
+    public void CastFrostSpell(Vector3 spawnPos, Quaternion playerRotation)
     {
-        playerStat.Attack();
-        attack.attackHappened();
         Debug.Log("FROST SPELL");
-
-        Vector3 playerPos = playerMoji.transform.position;
-        Vector3 playerDirection = playerMoji.transform.right *-1;
-        Quaternion playerRotation = playerMoji.transform.rotation;
-
-        Debug.Log(playerDirection);
-
-        Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
-
-        playerRotation = playerRotation * Quaternion.Euler(90f, 0, 90f);
-        GameObject Instantiate = PhotonNetwork.InstantiateSceneObject("ProjectileFr", spawnPos, playerRotation, 0, null) as GameObject;
-        Instantiate.GetComponent<Rigidbody>().AddRelativeForce((Instantiate.transform.forward * -1) * 300 * Time.deltaTime, ForceMode.VelocityChange);
-        Instantiate.tag = "Projectile";
+        GameObject tmp = Instantiate(ice, spawnPos, playerRotation) as GameObject;
+        tmp.tag = "Projectile";
     }
 
-    public void CastBasicSpell()
+    [PunRPC]
+    public void CastBasicSpell(Vector3 spawnPos, Quaternion playerRotation)
     {
-        playerStat.Attack();
-        attack.attackHappened();
         Debug.Log("BASIC SPELL");
-        Vector3 playerPos = playerMoji.transform.position;
-        Vector3 playerDirection = playerMoji.transform.right * -1;
-        Quaternion playerRotation = playerMoji.transform.rotation;
-
-        Debug.Log(playerDirection);
-
-        Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
-
-        playerRotation = playerRotation * Quaternion.Euler(90f, 0, 90f);
-        GameObject Instantiate = PhotonNetwork.InstantiateSceneObject("ProjectileB", spawnPos, playerRotation, 0, null) as GameObject;
-        Instantiate.GetComponent<Rigidbody>().AddRelativeForce((Instantiate.transform.forward * -1) * 300 * Time.deltaTime, ForceMode.VelocityChange);
-        Instantiate.tag = "Projectile";
+        GameObject tmp = Instantiate(basic, spawnPos, playerRotation) as GameObject;
+        tmp.tag = "Projectile";
     }
 
-    public void CastFireSpell()
+    [PunRPC]
+    public void CastFireSpell(Vector3 spawnPos, Quaternion playerRotation)
     {
-        playerStat.Attack();
-        attack.attackHappened();
         Debug.Log("FIRE SPELL");
-        Vector3 playerPos = playerMoji.transform.position;
-        Vector3 playerDirection = playerMoji.transform.right * -1;
-        Quaternion playerRotation = playerMoji.transform.rotation;
-
-        Debug.Log(playerDirection);
-
-        Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
-
-        playerRotation = playerRotation * Quaternion.Euler(90f, 0, 90f);
-        GameObject Instantiate = PhotonNetwork.InstantiateSceneObject("ProjectileFi", spawnPos, playerRotation, 0, null) as GameObject;
-        Instantiate.tag = "Projectile";
-        Instantiate.GetComponent<Rigidbody>().AddRelativeForce((Instantiate.transform.forward * -1) * 300 * Time.deltaTime, ForceMode.VelocityChange);
+        GameObject tmp = Instantiate(fire, spawnPos + Vector3.forward * -2, playerRotation) as GameObject;
+        GameObject tmp1 = Instantiate(fire, spawnPos + Vector3.forward * 2, playerRotation) as GameObject;
+        tmp.tag = "Projectile";
+        tmp1.tag = "Projectile";
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

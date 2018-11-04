@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 54195104343172360}
   - component: {fileID: 114921215142805424}
   - component: {fileID: 114585354596441984}
+  - component: {fileID: 114695015589224512}
   m_Layer: 0
   m_Name: ProjectileFr
   m_TagString: Projectile
@@ -40,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731441319284328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.216053, y: 62.81056, z: -219.86485}
+  m_LocalPosition: {x: 29.807, y: 8.882, z: -70.439}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,7 +96,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731441319284328}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -133,8 +134,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1731441319284328}
-  projectileSpeed: 250
-  shootCollisionDelay: 0.3
+  projectileAccel: 1850
+  shootCollisionDelay: 0.1
+  autoRemoveTime: 2
+--- !u!114 &114695015589224512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731441319284328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
 --- !u!114 &114921215142805424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,12 +165,12 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 0
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 114695015589224512}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -168,9 +183,9 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731441319284328}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.0047997
-  m_Height: 2.9864218
+  m_Radius: 1.44
+  m_Height: 3.82
   m_Direction: 1
   m_Center: {x: -0.0025200248, y: -0.4932106, z: 0.004799486}
