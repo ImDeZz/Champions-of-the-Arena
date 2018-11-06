@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats :Photon.MonoBehaviour
 {
@@ -9,6 +10,33 @@ public class PlayerStats :Photon.MonoBehaviour
     private bool playerHasWeapon = false;
     private string playerWeapon = "";
 
+    //public DeathMenu deathMenu;
+    //public GameObject[] asd;
+    public GameObject prefab;
+    GameObject prefabClone;
+   
+    
+   
+
+    public void Start()
+    {
+        prefabClone = Instantiate(prefab, new Vector3(497, 252, 0), Quaternion.identity) as GameObject;
+        
+        prefabClone.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
+        prefabClone.SetActive(false);
+    }
+   
+
+    public void RestartGame()
+    {
+        Debug.Log("MOST KENE LATSZODNIA");
+        GameObject.Find("VirtualJoystick").SetActive(false);
+        GameObject.Find("AttackButton").SetActive(false);
+        prefabClone.SetActive(true);
+       
+
+
+    }
     public void setWeapon(string weapon)
     {
         if (weapon.Contains("_"))
@@ -20,6 +48,7 @@ public class PlayerStats :Photon.MonoBehaviour
             playerWeapon = weapon;
         }
         playerHasWeapon = true;
+        //RestartGame();
     }
 
     public void Attack()
@@ -68,6 +97,7 @@ public class PlayerStats :Photon.MonoBehaviour
         {
             Debug.Log("U dedcollider");
             this.photonView.RPC("killPlayer", PhotonTargets.All, this.photonView.viewID);
+            RestartGame();
         }
     }
 
@@ -77,10 +107,12 @@ public class PlayerStats :Photon.MonoBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             PhotonNetwork.Destroy(PhotonView.Find(viewID));
+            RestartGame();
         }
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
     }
+
 }
