@@ -14,17 +14,20 @@ public class PlayerStats :Photon.MonoBehaviour
     //public GameObject[] asd;
     public GameObject prefab;
     GameObject prefabClone;
-   
-    
-   
 
-    public void Start()
+	//public GameObject spellImage;
+	//public Image myImage;
+	public Sprite basicSpellImage;
+	public Sprite fireSpellImage;
+	public Sprite frostSpellImage;
+	
+	public void Start()
     {
         prefabClone = Instantiate(prefab, new Vector3(497, 252, 0), Quaternion.identity) as GameObject;
-        
         prefabClone.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
         prefabClone.SetActive(false);
-    }
+
+	}
    
 
     public void RestartGame()
@@ -32,7 +35,9 @@ public class PlayerStats :Photon.MonoBehaviour
         Debug.Log("MOST KENE LATSZODNIA");
         GameObject.Find("VirtualJoystick").SetActive(false);
         GameObject.Find("AttackButton").SetActive(false);
-        prefabClone.SetActive(true);
+		GameObject.Find("spellImage").SetActive(false);
+		prefabClone.SetActive(true);
+		
        
 
 
@@ -48,8 +53,11 @@ public class PlayerStats :Photon.MonoBehaviour
             playerWeapon = weapon;
         }
         playerHasWeapon = true;
-        //RestartGame();
-    }
+		//myImage.sprite = basicSpellImage;
+		//RestartGame();
+		GameObject.Find("spellImage").SetActive(false);
+
+	}
 
     public void Attack()
     {
