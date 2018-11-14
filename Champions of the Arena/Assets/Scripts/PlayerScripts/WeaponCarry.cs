@@ -14,7 +14,12 @@ public class WeaponCarry : MonoBehaviour {
     {
         playerStatScript = player.GetComponent<PlayerStats>();
         photonView = player.GetComponent<PhotonView>();
+       
+        
     }
+
+
+   
 
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -41,6 +46,7 @@ public class WeaponCarry : MonoBehaviour {
         if (PhotonNetwork.isMasterClient)
         {
             PhotonNetwork.Destroy(PhotonView.Find(id));
+
         }
     }
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

@@ -10,6 +10,9 @@ public class Attack : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData pointerEventData)
     {
         attacked = true;
+       /* GameObject.Find("spellImageBasic").SetActive(true);
+        GameObject.Find("spellImageFrost").SetActive(true);
+        GameObject.Find("spellImageFire").SetActive(true);*/
     }
 
     public bool isAttacking()
@@ -25,5 +28,8 @@ public class Attack : MonoBehaviour, IPointerClickHandler
     public void attackCantHappen()
     {
         attacked = false;
+       /* GameObject.Find("spellImageBasic").SetActive(false);
+        GameObject.Find("spellImageFrost").SetActive(false);
+        GameObject.Find("spellImageFire").SetActive(false);*/
     }
 }

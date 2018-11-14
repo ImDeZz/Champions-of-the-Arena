@@ -342,3 +342,7 @@ C:\Git\Champions of the Arena\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs
 C:\Git\Champions of the Arena\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Git\Champions of the Arena\obj\Debug\Assembly-CSharp.dll
 C:\Git\Champions of the Arena\obj\Debug\Assembly-CSharp.pdb
+E:\szofttech\Champions of the Arena\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+E:\szofttech\Champions of the Arena\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+E:\szofttech\Champions of the Arena\obj\Debug\Assembly-CSharp.dll
+E:\szofttech\Champions of the Arena\obj\Debug\Assembly-CSharp.pdb

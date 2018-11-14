@@ -7,39 +7,58 @@ using UnityEngine.UI;
 public class PlayerStats :Photon.MonoBehaviour
 {
     [SerializeField] string playerName = "asd";
+    int playerScore;
+
     private bool playerHasWeapon = false;
     private string playerWeapon = "";
+    public Sprite fireSpell;
+    public Sprite basicSpell;
+    public Sprite frostSpell;
 
-    //public DeathMenu deathMenu;
-    //public GameObject[] asd;
-    public GameObject prefab;
-    GameObject prefabClone;
 
-	//public GameObject spellImage;
+
+    public GameObject spellImage;
+    GameObject spellImageClone;
+
+    /*//public GameObject spellImage;
 	//public Image myImage;
 	public Sprite basicSpellImage;
 	public Sprite fireSpellImage;
-	public Sprite frostSpellImage;
-	
-	public void Start()
+	public Sprite frostSpellImage;*/
+
+    public GameObject prefab;
+    GameObject prefabClone;
+
+    public void Start()
     {
+        //Minikep letrehozasa
+        spellImageClone = Instantiate(spellImage, new Vector2(850, 85), Quaternion.identity) as GameObject;
+        spellImageClone.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
+        spellImageClone.SetActive(false);
+        //Halalkepernyo letrehozasa
         prefabClone = Instantiate(prefab, new Vector3(497, 252, 0), Quaternion.identity) as GameObject;
         prefabClone.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
-        prefabClone.SetActive(false);
-
-	}
-   
+        //prefabClone.SetActive(false);
+        // GameObject.Find("spellImageFrost").SetActive(false);
+        //Score nullazasa
+        playerScore = 0;
+    }
+    
 
     public void RestartGame()
     {
         Debug.Log("MOST KENE LATSZODNIA");
         GameObject.Find("VirtualJoystick").SetActive(false);
         GameObject.Find("AttackButton").SetActive(false);
-		GameObject.Find("spellImage").SetActive(false);
-		prefabClone.SetActive(true);
-		
-       
+        GameObject.Find("spellImage(Clone)").SetActive(false);
+        prefabClone.SetActive(true);
+        
 
+
+    }
+
+    public void activeSpell()
+    {
 
     }
     public void setWeapon(string weapon)
@@ -47,15 +66,44 @@ public class PlayerStats :Photon.MonoBehaviour
         if (weapon.Contains("_"))
         {
             playerWeapon = weapon.Substring(0, weapon.IndexOf("_"));
+            if (weapon.Contains("B"))
+            {
+                Debug.Log("FIRE SPELL");
+                Debug.Log("SIKFOSHOGY");
+                spellImageClone.GetComponent<Image>().sprite = basicSpell;
+                spellImageClone.SetActive(true);
+            }
+            else
+            {
+                if (weapon.Contains("Fr"))
+                {
+                    Debug.Log("Frost SPELL");
+                    Debug.Log("SIKFOSHOGY");
+
+                    spellImageClone.GetComponent<Image>().sprite = frostSpell;
+                    spellImageClone.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("Basic SPELL");
+                    Debug.Log("SIKFOSHOGY");
+                    spellImageClone.GetComponent<Image>().sprite = fireSpell;
+                    spellImageClone.SetActive(true);
+                    // GameObject.Find("spellImageBasic").SetActive(true);
+                }
+            }
+            
         }
         else
         {
             playerWeapon = weapon;
+
+            
         }
         playerHasWeapon = true;
 		//myImage.sprite = basicSpellImage;
 		//RestartGame();
-		GameObject.Find("spellImage").SetActive(false);
+		//GameObject.Find("spellImage").SetActive(false);
 
 	}
 
@@ -64,6 +112,8 @@ public class PlayerStats :Photon.MonoBehaviour
         Debug.Log(playerName + " has just attacked with " + playerWeapon);
         playerHasWeapon = false;
         playerWeapon = "";
+        spellImageClone.SetActive(false);
+
     }
 
     public bool getHasWeapon()
@@ -87,6 +137,7 @@ public class PlayerStats :Photon.MonoBehaviour
         {
             Debug.Log("U dedTRIGGER");
             this.photonView.RPC("killPlayer", PhotonTargets.All, this.photonView.viewID);
+            RestartGame();
         }
     }
 
@@ -96,6 +147,7 @@ public class PlayerStats :Photon.MonoBehaviour
         {
             Debug.Log("U dedcollision");
             this.photonView.RPC("killPlayer", PhotonTargets.All, this.photonView.viewID);
+            RestartGame();
         }
     }
 
@@ -115,7 +167,7 @@ public class PlayerStats :Photon.MonoBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             PhotonNetwork.Destroy(PhotonView.Find(viewID));
-            RestartGame();
+            
         }
     }
 
