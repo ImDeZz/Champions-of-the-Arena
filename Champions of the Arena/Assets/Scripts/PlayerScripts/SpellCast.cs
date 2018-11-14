@@ -76,6 +76,7 @@ public class SpellCast : Photon.MonoBehaviour
         Debug.Log("FROST SPELL");
         GameObject tmp = Instantiate(ice, spawnPos, playerRotation) as GameObject;
         tmp.tag = "Projectile";
+        
     }
 
     [PunRPC]

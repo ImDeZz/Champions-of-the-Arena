@@ -9,13 +9,12 @@ using UnityEngine.SceneManagement;
 
 public class DeathMenu : Photon.MonoBehaviour
 {
-
+    
 
 
     public void Respawn()
     {
        
-
     }
     public void BackToMenu()
     {
